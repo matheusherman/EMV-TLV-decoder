@@ -11,11 +11,16 @@ public class TagRepository {
     public static TagDefinition getTagDefinition(String tag) {
         if (tag.equals("9F33")) {
             return create9F33();
-
         }
 //        else if (tag.equals("9F34")) {
 //            return create9F34();
 //        }
+        else if (tag.equals("9F6C")) {
+            return create9F6C();
+        }
+        else if (tag.equals("82")) {
+            return create82();
+        }
         else if (tag.equals("9F40")) {
             return create9F40();
         }
@@ -60,6 +65,63 @@ public class TagRepository {
         return new TagDefinition(
                 "9F33",
                 Arrays.asList(byte1, byte2, byte3)
+        );
+    }
+  
+    private static TagDefinition create9F6C() {
+
+        // Byte 1
+        ByteDefinition byte1 = new ByteDefinition(
+                1,
+                Arrays.asList(
+                        new BitDefinition(8, "Online PIN Required"),
+                        new BitDefinition(7, "Signature Required"),
+                        new BitDefinition(6, "Go Online if Offline Data Authentication Fails"),
+                        new BitDefinition(5, "Switch Interface if Offline Data Authentication Fails"),
+                        new BitDefinition(4, "Go Online if Application Expired"),
+                        new BitDefinition(3, "Switch Interface for Cash Transactions"),
+                        new BitDefinition(2, "Switch Interface for Cashback Transactions")
+                )
+        );
+
+        // Byte 2
+        ByteDefinition byte2 = new ByteDefinition(
+                2,
+                Arrays.asList(
+                        new BitDefinition(8, "Consumer Device CVM Performed"),
+                        new BitDefinition(7, "Card supports Issuer Update Processing at the POS")
+                )
+        );
+
+        return new TagDefinition(
+                "9F6C",
+                Arrays.asList(byte1, byte2)
+        );
+    }
+  
+    private static TagDefinition create82() {
+
+        // Byte 1
+        ByteDefinition byte1 = new ByteDefinition(
+                1,
+                Arrays.asList(
+                        new BitDefinition(6, "DDA supported (EMV mode)")
+                )
+        );
+
+        // Byte 2
+        ByteDefinition byte2 = new ByteDefinition(
+                2,
+                Arrays.asList(
+                        new BitDefinition(8, "Mag-stripe mode supported"),
+                        new BitDefinition(7, "Mobile phone"),
+                        new BitDefinition(6, "Contactless transaction supported")
+                )
+        );
+      
+        return new TagDefinition(
+            "82",
+            Arrays.asList(byte1, byte2)
         );
     }
 
