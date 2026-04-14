@@ -18,6 +18,9 @@ public class TagRepository {
         else if (tag.equals("82")) {
             return create82();
         }
+        else if (tag.equals("9F66")) {
+            return create9F66();
+        }
         return null;
     }
 
@@ -116,6 +119,58 @@ public class TagRepository {
         return new TagDefinition(
                 "82",
                 Arrays.asList(byte1, byte2)
+        );
+    }
+
+    private static TagDefinition create9F66() {
+
+        // Byte 1
+        ByteDefinition byte1 = new ByteDefinition(
+                1,
+                Arrays.asList(
+                        new BitDefinition(8, "Mag-stripe mode supported"),
+                        new BitDefinition(6, "EMV mode supported"),
+                        new BitDefinition(5, "EMV contact chip supported"),
+                        new BitDefinition(4, "Offline-only reader"),
+                        new BitDefinition(3, "Online PIN supported"),
+                        new BitDefinition(2, "Signature supported"),
+                        new BitDefinition(1, "Offline Data Authentication for Online Authorizations supported")
+                        // bit 7 RFU
+                )
+        );
+
+        // Byte 2
+        ByteDefinition byte2 = new ByteDefinition(
+                2,
+                Arrays.asList(
+                        new BitDefinition(8, "Online cryptogram required"),
+                        new BitDefinition(7, "CVM required"),
+                        new BitDefinition(6, "Offline PIN supported (contact)")
+                        // bits 5-1 RFU
+                )
+        );
+
+        // Byte 3
+        ByteDefinition byte3 = new ByteDefinition(
+                3,
+                Arrays.asList(
+                        new BitDefinition(8, "Issuer Update Processing supported"),
+                        new BitDefinition(7, "Consumer Device CVM supported")
+                        // bits 6-1 RFU
+                )
+        );
+
+        // Byte 4 (todo RFU, não declarar)
+        ByteDefinition byte4 = new ByteDefinition(
+                4,
+                Arrays.asList(
+                        // tudo RFU → lista vazia
+                )
+        );
+
+        return new TagDefinition(
+                "9F66",
+                Arrays.asList(byte1, byte2, byte3, byte4)
         );
     }
 }
