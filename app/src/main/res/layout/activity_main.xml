@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editTagInput"
+        android:id="@+id/inputTag"
+        android:hint="Digite a TAG (ex: 9F33)"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite a TAG (ex: 9F33)" />
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnBuscar"
+        android:id="@+id/btnSync"
+        android:text="Buscar Sync"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enviar"
-        android:layout_marginTop="12dp"/>
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnAsync"
+        android:text="Buscar Async"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/txtResultado"
+        android:id="@+id/outputHex"
+        android:text="HEX:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resultado aparecerá aqui"
-        android:layout_marginTop="16dp"/>
+        android:paddingTop="16dp"/>
 
-    <TextView
-        android:id="@+id/txtBytes"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bytes aparecerão aqui"
-        android:layout_marginTop="16dp"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/outputBits"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
 
 </LinearLayout>
