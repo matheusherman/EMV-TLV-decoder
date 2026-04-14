@@ -11,10 +11,12 @@ public class TagRepository {
     public static TagDefinition getTagDefinition(String tag) {
         if (tag.equals("9F33")) {
             return create9F33();
-
         }
         else if (tag.equals("9F6C")) {
             return create9F6C();
+        }
+        else if (tag.equals("82")) {
+            return create82();
         }
         return null;
     }
@@ -87,6 +89,32 @@ public class TagRepository {
 
         return new TagDefinition(
                 "9F6C",
+                Arrays.asList(byte1, byte2)
+        );
+    }
+
+    private static TagDefinition create82() {
+
+        // Byte 1
+        ByteDefinition byte1 = new ByteDefinition(
+                1,
+                Arrays.asList(
+                        new BitDefinition(6, "DDA supported (EMV mode)")
+                )
+        );
+
+        // Byte 2
+        ByteDefinition byte2 = new ByteDefinition(
+                2,
+                Arrays.asList(
+                        new BitDefinition(8, "Mag-stripe mode supported"),
+                        new BitDefinition(7, "Mobile phone"),
+                        new BitDefinition(6, "Contactless transaction supported")
+                )
+        );
+
+        return new TagDefinition(
+                "82",
                 Arrays.asList(byte1, byte2)
         );
     }
